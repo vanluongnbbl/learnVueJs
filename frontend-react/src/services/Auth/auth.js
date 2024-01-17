@@ -18,7 +18,6 @@ useEffect(() => {
 const loginAction = async (data) => {
     await axios.post(`${baseURL}/user/login`, data).then((res) => {
         if (res.data) {
-           
             localStorage.setItem('token', res.data.token)
             setUser(res.data.user);
             tokenRef.current = res.data.token;

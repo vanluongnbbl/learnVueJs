@@ -2,9 +2,15 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Joi = require('joi')
 
 const userSchema = new mongoose.Schema({
-    name: {
+    firstName: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    lastName: {
         type: String,
         required: true,
         trim: true,
@@ -98,5 +104,16 @@ userSchema.pre('save', async function(next) {
     next()
 })
 
+function validateUser(user) {
+    const schema = Joi.object({
+        firstName: Joi.string().min(3).max(20).required(),
+        lastName: Joi.string().min(3).max(20).required(),
+        email: Joi.string().min(5).max(29).required().email(),
+        password: Joi.string().min(8).max(20).required()
+    })
+    return schema.validate(user)
+}
+
 const User = mongoose.model('User', userSchema)
+module.exports.validate = validateUser
 module.exports = User

@@ -34,7 +34,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const schema = yup.object({
-  email: yup.string().max(20).required(),
+  email: yup.string().email().max(20).required(),
   password: yup.string().max(20).required(),
 }).required();
 
@@ -126,7 +126,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

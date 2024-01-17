@@ -1,12 +1,24 @@
 const express = require('express')
 const router = new express.Router()
 const User = require('../models/user')
+const validate = require('../models/user')
+
 const auth = require('../middleware/auth')
 
+// create user
 router.post('/user', async (req, res) => {
-    const user = new User(req.body)
-    const token = await user.generateAuthToken()
+    const { error } = validate(req.body)
+    if (error) {
+        return res.status(400).send(error.details[0].message)
+    }
+    const user = await User.findOne({ email: req.body.email })
+    if (user) {
+        return res.status(400).send('User already exisits. Please sign in')
+    } 
+
     try {
+        const user = new User(req.body)
+        const token = await user.generateAuthToken()
         await user.save()
         res.status(201).send({user, token})
     } catch (error) {
@@ -40,7 +52,6 @@ router.post('/user/login', async (req, res) => {
 
 router.post('/user/logout', auth, async (req, res) => {
     try {
-        console.log('req =>>>>>>>>>>>>', req)
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
         })
