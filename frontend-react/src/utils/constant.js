@@ -1,0 +1,5 @@
+export const HOME_URL = '/'
+export const LOGIN_URL = '/login'
+export const SIGN_UP_URL = '/signup'
+export const LIFTING_STATE_UP_URL =  '/lsu'
+export const PROPS_DRILLING_URL = '/propsDrilling'

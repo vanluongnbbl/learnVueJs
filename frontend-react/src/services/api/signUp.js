@@ -11,7 +11,6 @@ const useSignUp = () => {
     
     const signUpApi = async (data) => {
         await axios.post(`${baseURL}/user`, data).then((res) => {
-            console.log('ressss', res)
             if (res.data) {
                 localStorage.setItem('token', res.data.token)
                 tokenRef.current = res.data.token
