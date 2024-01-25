@@ -31,7 +31,6 @@ const loginAction = async (data) => {
 
 const logOutAction = async () => {
     await axios.post(`${baseURL}/user/logout`).then((res) => {
-        console.log('res', res)
         if (res) {
             setUser(null);
             localStorage.removeItem('token')

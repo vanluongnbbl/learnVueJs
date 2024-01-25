@@ -51,6 +51,15 @@ export default function ListLink() {
         </ListItemButton>
       </Link>
 
+      <Link to="/chat">
+        <ListItemButton>
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Chat" />
+        </ListItemButton>
+      </Link>
+
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
           <InboxIcon />
@@ -64,7 +73,7 @@ export default function ListLink() {
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
-            <ListItemText primary="Starred" />
+            <ListItemText primary="Chat" />
           </ListItemButton>
         </List>
       </Collapse>

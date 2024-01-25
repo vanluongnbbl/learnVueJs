@@ -11,28 +11,23 @@ function Home() {
     const handeleLogout = async () => {
         await auth.logOutAction()
     }
-
-    console.log('data, error, isLoading', data, error, isLoading);
  
   return (
     <div className='home' style={{ padding: 30 }}>
         <h1>Home Page</h1>
         <Button onClick={handeleLogout} variant="contained" sx={{ mt: 3, mb: 2 }} >Log out</Button>
-
-
         <ListLink />
 
-
         {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : data ? (
-        <>
-          <h3>{data.species.name}</h3>
-          <img src={data.sprites.front_shiny} alt={data.species.name} />
-        </>
-      ) : null}
+          <>Oh no, there was an error</>
+        ) : isLoading ? (
+          <>Loading...</>
+        ) : data ? (
+          <>
+            <h3>{data.species.name}</h3>
+            <img src={data.sprites.front_shiny} alt={data.species.name} />
+          </>
+        ) : null}
     </div>
   )
 }
